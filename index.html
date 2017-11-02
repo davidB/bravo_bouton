@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Bravo Bouton !</title>
+    <link href='http://fonts.googleapis.com/css?family=Yanone+Kaffeesatz:700' rel='stylesheet' type='text/css'>
+    <style>
+body {
+    width: 100%;
+    height: 100vh;
+}
+.outer {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.child {
+  /*margin: auto;  /* Magic! */
+}
+#msg {
+    font-family: 'Yanone Kaffeesatz';
+    font-weight: 700;
+    font-size: 4em;
+}
+#mainBtn {
+	position: relative;
+    color: rgba(255,255,255,1);
+    text-decoration: none;
+    background-color: rgba(219,87,5,1);
+    font-family: 'Yanone Kaffeesatz';
+    font-weight: 700;
+    font-size: 3em;
+    display: block;
+    padding: 4px;
+    -webkit-border-radius: 8px;
+    -moz-border-radius: 8px;
+    border-radius: 8px;
+    -webkit-box-shadow: 0px 9px 0px rgba(219,31,5,1), 0px 9px 25px rgba(0,0,0,.7);
+    -moz-box-shadow: 0px 9px 0px rgba(219,31,5,1), 0px 9px 25px rgba(0,0,0,.7);
+    box-shadow: 0px 9px 0px rgba(219,31,5,1), 0px 9px 25px rgba(0,0,0,.7);
+	width: 160px;
+	text-align: center;
+	
+	-webkit-transition: all .1s ease;
+	-moz-transition: all .1s ease;
+	-ms-transition: all .1s ease;
+	-o-transition: all .1s ease;
+	transition: all .1s ease;
+}
+
+#mainBtn:active {
+    -webkit-box-shadow: 0px 3px 0px rgba(219,31,5,1), 0px 3px 6px rgba(0,0,0,.9);
+    -moz-box-shadow: 0px 3px 0px rgba(219,31,5,1), 0px 3px 6px rgba(0,0,0,.9);
+    box-shadow: 0px 3px 0px rgba(219,31,5,1), 0px 3px 6px rgba(0,0,0,.9);
+    position: relative;
+    top: 6px;
+}
+    </style>
+</head>
+<body>
+    <div class="outer">
+        <div id="msg" class="child">&nbsp;</div>
+        <button id="mainBtn" class="child"></button>
+    </div>
+    <script>
+        var db = {
+            "session" : {
+                "lang": "fr",
+                "lastIdx": -1,
+            },
+            "text": {
+                "fr": {
+                    "mainBtn" : [
+                        "clicker",
+                        "appuyer",
+                        "presser & relacher"
+                    ],
+                    "msg" : [
+                        "!",
+                        "100 %",
+                        "applodissement",
+                        "bien jouer",
+                        "bravo",
+                        "ça déchire grave",
+                        "ça me troue le cul",
+                        "délire",
+                        "dingue",
+                        "encore mieux",
+                        "époustouflant",
+                        "excelent",
+                        "exploit",
+                        "extra",
+                        "génial",
+                        "GG",
+                        "hallucinant",
+                        "incroyable",
+                        "légendaire",
+                        "magnifique",
+                        "oui",
+                        "succes",
+                        "super",
+                        "trop classe",
+                        "trop fort",
+                        "trop génial",
+                        "trop ouf",
+                        "wahoo"
+                    ]
+                },
+                "en": {
+                    "mainBtn" : [
+                        "click",
+                        "push me",
+                    ],
+                    "msg" : [
+                        "bravo",
+                        "good game",
+                        "GG",
+                        "super",
+                        "excelent",
+                        "success",
+                        "yes",
+                        "awsome"
+                    ]
+                },
+                "jp": {
+                    "mainBtn" : [
+                        "click"
+                    ],
+                    "msg":[
+                        "SUGOÏ"
+                    ]
+                }
+            }
+        }
+        function mainClick() {
+            console.log("mainClick");
+            var msgEl = document.getElementById("msg");
+            var msgs = db.text[db.session.lang]["msg"];
+            var msgIdx = db.session.lastIdx
+            while (msgIdx == db.session.lastIdx) {
+                msgIdx = Math.floor((Math.random() * msgs.length));
+            }
+            msgEl.textContent = msgs[msgIdx] + " !";
+            db.session.lastIdx = msgIdx;
+        }
+        function init() {
+            console.log("init");
+            document.getElementById("mainBtn").onclick = mainClick;
+            document.getElementById("mainBtn").textContent = db.text[db.session.lang]["mainBtn"][0];
+        }
+        init();
+    </script>
+</body>
+</html>
